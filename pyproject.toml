@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["reversible", "circuit", "quantum", "simulator", "logic"]
 dependencies = [
-    bitarray >= 3.4.0
+    "bitarray >= 3.4.0"
 ]
 
 [project.urls]
