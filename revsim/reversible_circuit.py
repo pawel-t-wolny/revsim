@@ -50,10 +50,10 @@ class ReversibleCircuit:
         self.assert_gate_and_mapping(gate, gate_mapping)
         self.gates.append((gate, gate_mapping))
 
-    def to_gate(self, name: str) -> ReversibleGate:
+    def to_gate(self, label: str) -> ReversibleGate:
         from .gates.custom_gate import CustomGate
 
-        return CustomGate(self, name)
+        return CustomGate(self, label)
 
     def x(self, target_bit: int):
         gate = NotGate()

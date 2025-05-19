@@ -5,7 +5,7 @@ from ..custom_types import Mapping, Registers
 class CCNotGate(ReversibleGate):
 
     def __init__(self):
-        super().__init__(input_count=3, name="ccnot")
+        super().__init__(input_count=3, label="ccnot")
 
     def apply(self, registers: Registers, gate_mapping: Mapping):
         self.assert_gate_mapping(registers, gate_mapping)

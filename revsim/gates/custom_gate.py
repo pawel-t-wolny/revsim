@@ -5,10 +5,10 @@ from ..custom_types import Mapping, Registers
 
 class CustomGate(ReversibleGate):
     circuit: ReversibleCircuit
-    name: str
+    label: str
 
-    def __init__(self, circuit: ReversibleCircuit, name: str):
-        super().__init__(input_count=circuit.width, name=name)
+    def __init__(self, circuit: ReversibleCircuit, label: str):
+        super().__init__(input_count=circuit.width, label=label)
         self.circuit = circuit
 
     def apply(self, registers: Registers, gate_mapping: Mapping):

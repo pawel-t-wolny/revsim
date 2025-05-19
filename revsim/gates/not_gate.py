@@ -5,7 +5,7 @@ from ..custom_types import Mapping, Registers
 class NotGate(ReversibleGate):
 
     def __init__(self):
-        super().__init__(input_count=1, name="not")
+        super().__init__(input_count=1, label="not")
 
     def apply(self, registers: Registers, gate_mapping: Mapping):
         self.assert_gate_mapping(registers, gate_mapping)

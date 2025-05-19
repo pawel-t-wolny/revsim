@@ -60,27 +60,27 @@ class ReversibleGate(ABC):
     #   mapped to input register X1.
 
     input_count: int
-    name: str
+    label: str
 
-    def __init__(self, input_count: int, name: str):
+    def __init__(self, input_count: int, label: str):
         super().__init__()
 
         self.input_count = input_count
-        self.name = name
+        self.label = label
 
     def assert_gate_mapping(self, registers: Registers, gate_mapping: Mapping):
         for i in gate_mapping:
             assert (
                 0 <= i < len(registers)
-            ), f"Some indexes in the gate mapping do not correspond to registers for '{self.name}' gate"
+            ), f"Some indexes in the gate mapping do not correspond to registers for '{self.label}' gate"
 
         assert len(set(gate_mapping)) == len(
             gate_mapping
-        ), f"There are non unique indexes in the gate mapping for '{self.name}' gate"
+        ), f"There are non unique indexes in the gate mapping for '{self.label}' gate"
 
         assert self.input_count == len(
             gate_mapping
-        ), f"The number of inputs is not equal to the number of indexes in gate mapping for '{self.name}' gate"
+        ), f"The number of inputs is not equal to the number of indexes in gate mapping for '{self.label}' gate"
 
     @abstractmethod
     def apply(self, registers: Registers, gate_mapping: Mapping) -> Registers: ...
