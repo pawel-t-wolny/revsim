@@ -11,7 +11,7 @@ from .reversible_gate import Registers
 
 class ReversibleCircuit:
     gates: List[Tuple[ReversibleGate, Mapping]]
-    width: int
+    size: int
 
     def __init__(self, width: int, gates: List[ReversibleGate] = None):
         if gates is None:
@@ -21,10 +21,10 @@ class ReversibleCircuit:
             assert gate.input_count <= width
 
         self.gates = gates
-        self.width = width
+        self.size = width
 
     def run(self, initial_values: str) -> Registers:
-        assert len(initial_values) == self.width
+        assert len(initial_values) == self.size
         registers = bitarray(initial_values)
         for gate, gate_mapping in self.gates:
             registers = gate.apply(registers, gate_mapping)
@@ -33,10 +33,10 @@ class ReversibleCircuit:
 
     def assert_gate_and_mapping(self, gate: ReversibleGate, gate_mapping: Mapping):
         for i in gate_mapping:
-            assert 0 <= i < self.width, f"Index {i} is invalid for the {gate.label} gate"
+            assert 0 <= i < self.size, f"Index {i} is invalid for the {gate.label} gate"
 
         assert (
-            gate.input_count <= self.width
+            gate.input_count <= self.size
         ), f"The {gate.label} gate has more inputs than circuit registers"
         assert len(set(gate_mapping)) == len(
             gate_mapping
@@ -55,7 +55,7 @@ class ReversibleCircuit:
         return CustomGate(self, label)
     
     def width(self) -> int:
-        return self.width()
+        return self.size
 
     def x(self, target_bit: int):
         gate = NotGate()
