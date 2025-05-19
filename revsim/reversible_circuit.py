@@ -9,7 +9,6 @@ from .reversible_gate import ReversibleGate
 from .reversible_gate import Registers
 
 
-
 class ReversibleCircuit:
     gates: List[Tuple[ReversibleGate, Mapping]]
     width: int
@@ -34,17 +33,17 @@ class ReversibleCircuit:
 
     def assert_gate_and_mapping(self, gate: ReversibleGate, gate_mapping: Mapping):
         for i in gate_mapping:
-            assert 0 <= i < self.width, f"Index {i} is invalid for the {gate.name} gate"
+            assert 0 <= i < self.width, f"Index {i} is invalid for the {gate.label} gate"
 
         assert (
             gate.input_count <= self.width
-        ), f"The {gate.name} gate has more inputs than circuit registers"
+        ), f"The {gate.label} gate has more inputs than circuit registers"
         assert len(set(gate_mapping)) == len(
             gate_mapping
-        ), f"There are non unique indexes in the gate mapping for '{gate.name}' gate"
+        ), f"There are non unique indexes in the gate mapping for '{gate.label}' gate"
         assert gate.input_count == len(
             gate_mapping
-        ), f"The number of inputs is not equal to the number of indexes in gate mapping for '{gate.name}' gate"
+        ), f"The number of inputs is not equal to the number of indexes in gate mapping for '{gate.label}' gate"
 
     def append(self, gate: ReversibleGate, gate_mapping: Mapping):
         self.assert_gate_and_mapping(gate, gate_mapping)
@@ -54,6 +53,9 @@ class ReversibleCircuit:
         from .gates.custom_gate import CustomGate
 
         return CustomGate(self, label)
+    
+    def width(self) -> int:
+        return self.width()
 
     def x(self, target_bit: int):
         gate = NotGate()
