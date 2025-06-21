@@ -8,7 +8,7 @@ class CustomGate(ReversibleGate):
     label: str
 
     def __init__(self, circuit: ReversibleCircuit, label: str):
-        super().__init__(input_count=circuit.width, label=label)
+        super().__init__(input_count=circuit.width(), label=label)
         self.circuit = circuit
 
     def apply(self, registers: Registers, gate_mapping: Mapping):
